@@ -22,7 +22,7 @@ node {
 
     stage('deploy image') {
         
-        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:MARK') {
+        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'MARK') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
