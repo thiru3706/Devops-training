@@ -22,7 +22,7 @@ node {
 
     stage('deploy image') {
         
-        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'AKIAIZRK6S5GBVOYCDZA (aws root access key)') {
+        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'AKIAIZRK6S5GBVOYCDZA') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
