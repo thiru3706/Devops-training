@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("thiru3706/devopstraining")
+        app = docker.build("thiru3706/devopstraining1")
     }
 
     stage('Test image') {
@@ -26,7 +26,14 @@ node {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
-                echo "Trying to Push Docker Build to AWS EC2"
+
+    stage('deploy AWS') {
+		step {
+	sh '''
+		ssh -i "ec2-demo-mumbai.pem" ubuntu@ec2-15-206-146-143.ap-south-1.compute.amazonaws.com
+                sudo docker run -it -p9000:9000 thiru3706/devopstraining1
+	'''
+	}
     }
 }
 
