@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("thiru3706/Devopstraining:1.0")
+        app = docker.build("thiru3706/devopstraining")
     }
 
     stage('Test image') {
@@ -20,13 +20,17 @@ node {
         }
     }
 
-    stage('Push image') {
+    stage('deploy image') {
         
-        docker.withRegistry('https://003279909143.dkr.ecr.ap-south-1.amazonaws.com/devops-training', 'ecr:ap-south-1:AWS ROOT ACCESS KEY') {
+<<<<<<< HEAD:jenkinsfiles
+        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:AWS ROOT ACCESS KEY') {
+=======
+        docker.withRegistry('https://003279909143.dkr.ecr.ap-south-1.amazonaws.com/thiru3706/devopstraining', 'ecr:ap-south-1:MARK') {
+>>>>>>> f49b48ece527aafed13297f2faf05ea5c8c58ee8:jenkinsfile
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
-                echo "Trying to Push Docker Build to AWS ECR"
+                echo "Trying to Push Docker Build to AWS EC2"
     }
 }
 
