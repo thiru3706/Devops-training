@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("thiru3706/Devopstraining:1.0")
+        app = docker.build("thiru3706/devopstraining")
     }
 
     stage('Test image') {
@@ -22,7 +22,7 @@ node {
 
     stage('deploy image') {
         
-        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:AWS ROOT ACCESS KEY') {
+        aws ec2 instance.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:AWS ROOT ACCESS KEY') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
