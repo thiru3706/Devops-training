@@ -1,0 +1,32 @@
+node {
+    def app
+
+    stage('Clone repository') {
+       
+
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image */
+
+        app = docker.build("thiru3706/Devopstraining:1.0")
+    }
+
+    stage('Test image') {
+        
+        app.inside {
+            echo "Tests passed"
+        }
+    }
+
+    stage('deploy image') {
+        
+        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:AWS ROOT ACCESS KEY') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            } 
+                echo "Trying to Push Docker Build to AWS EC2"
+    }
+}
+
