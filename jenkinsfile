@@ -20,13 +20,13 @@ node {
         }
     }
 
-    stage('deploy image') {
+    stage('Push image') {
         
-        docker.withRegistry('https://ec2-15-206-146-143.ap-south-1.compute.amazonaws.com', 'ec2:ap-south-1:AWS ROOT ACCESS KEY') {
+        docker.withRegistry('https://003279909143.dkr.ecr.ap-south-1.amazonaws.com/devops-training', 'ecr:ap-south-1:AWS ROOT ACCESS KEY') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
-                echo "Trying to Push Docker Build to AWS EC2"
+                echo "Trying to Push Docker Build to AWS ECR"
     }
 }
 
